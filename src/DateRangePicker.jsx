@@ -8,8 +8,10 @@ import Fit from 'react-fit';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import DateInput from 'react-date-picker/dist/DateInput';
 
+import moment from 'moment';
 import { isMaxDate, isMinDate } from './shared/propTypes';
 import { callIfDefined } from './shared/utils';
+
 
 const baseClassName = 'react-daterange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
@@ -26,6 +28,7 @@ export default class DateRangePicker extends PureComponent {
 
     return null;
   }
+
 
   state = {};
 
@@ -116,6 +119,9 @@ export default class DateRangePicker extends PureComponent {
   stopPropagation = event => event.stopPropagation();
 
   clear = () => this.onChange(null);
+
+  lastWeek = () => this.onChange([moment().subtract(7, 'd'), moment()]);
+
 
   handleOutsideActionListeners(shouldListen) {
     const { isOpen } = this.state;
@@ -243,6 +249,7 @@ export default class DateRangePicker extends PureComponent {
       className: datePickerClassName, // Unused, here to exclude it from calendarProps
       onChange,
       value,
+      todayOption,
       ...calendarProps
     } = this.props;
 
@@ -258,6 +265,20 @@ export default class DateRangePicker extends PureComponent {
             value={value || null}
             {...calendarProps}
           />
+          {
+              todayOption
+                ? (
+                  <button
+                    className={`${baseClassName}__today-button`}
+                    onClick={this.lastWeek}
+                    type="button"
+                  >
+              Today
+                  </button>
+                )
+                : ''
+             }
+
         </div>
       </Fit>
     );
@@ -368,6 +389,7 @@ DateRangePicker.propTypes = {
   required: PropTypes.bool,
   returnValue: PropTypes.oneOf(['start', 'end', 'range']),
   showLeadingZeros: PropTypes.bool,
+  todayOption: PropTypes.bool,
   value: PropTypes.oneOfType([
     isValue,
     PropTypes.arrayOf(isValue),

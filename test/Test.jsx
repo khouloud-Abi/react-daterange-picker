@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker/src/entry.nostyle';
-import '@wojtekmaj/react-daterange-picker/src/DateRangePicker.less';
+import DateRangePicker from '../src/entry.nostyle';
+import '../src/DateRangePicker.less';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-calendar/src/Calendar.less';
 
@@ -136,6 +136,7 @@ export default class Test extends Component {
                 showNeighboringMonth={showNeighboringMonth}
                 showWeekNumbers={showWeekNumbers}
                 value={value}
+                todayOption
               />
               <br />
               <br />
