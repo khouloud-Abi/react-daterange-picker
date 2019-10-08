@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@wojtekmaj/react-daterange-picker": "latest",
+    "moment": "^2.24.0",
     "prop-types": "^15.6.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",

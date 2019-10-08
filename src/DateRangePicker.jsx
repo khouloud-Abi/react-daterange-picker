@@ -255,6 +255,8 @@ export default class DateRangePicker extends PureComponent {
 
     const className = `${baseClassName}__calendar`;
 
+    const isToday = moment(value[1]).format('DD MMM YY') === moment().format('DD MMM YY');
+
     return (
       <Fit>
         <div className={mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`)}>
@@ -271,6 +273,7 @@ export default class DateRangePicker extends PureComponent {
                   <button
                     className={`${baseClassName}__today-button`}
                     onClick={this.lastWeek}
+                    style={isToday ? { backgroundColor: '#0979be', color: 'white' } : {}}
                     type="button"
                   >
               Today
